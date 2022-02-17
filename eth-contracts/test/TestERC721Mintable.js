@@ -1,58 +1,79 @@
-var ERC721MintableComplete = artifacts.require('ERC721MintableComplete');
+var Test = require('../config/testConfig.js');
+var BigNumber = require('../../node_modules/bignumber.js');
 
-contract('TestERC721Mintable', accounts => {
+contract('ERC721Mintable', async (accounts) => {
 
-    const account_one = accounts[0];
-    const account_two = accounts[1];
+    before('Configure Contract', async () => {
+        config = await Test.Config(accounts);
+    });
 
-    describe('match erc721 spec', function () {
-        beforeEach(async function () { 
-            this.contract = await ERC721MintableComplete.new({from: account_one});
+    describe('match ERC721 spec', function () {
 
-            // TODO: mint multiple tokens
-            for(let n = 0; n <= 5; n++){
-                let status = await this.contract.mint(account_two,n,{from:account_one});
-              }
-  
+        it('should mint 10 tokens', async function () {
+
+            config.myToken.Transfer()
+                .on('data', (event) => {
+                })
+                .on('error', console.error);
+
+            const token_Id = config.firstTokenId
+
+            for (let i = token_Id; i <= config.lastTokenId; i++) {
+                let status = await config.myToken.mint(config.owner, i, { from: config.owner });
+            }
+
         })
 
-        it('should return total supply', async function () { 
-            let amount = await this.contract.totalSupply();
-            assert.equal(parseInt(amount),6,"Incorrect token amount for total supply");
+        it('should return total supply', async function () {
+
+            let status = await config.myToken.totalSupply.call();
+            assert.equal(status, config.lastTokenId, "Total Supply is not Correct !");
+
         })
 
-        it('should get token balance', async function () { 
-            let balance = await this.contract.balanceOf(account_two);
-            assert.equal(parseInt(balance), 6, "Incorrect token balance");
+        it('should get token balance', async function () {
+
+            let status = await config.myToken.balanceOf.call(config.owner);
+            assert.equal(status, config.lastTokenId, "Balance is not correct !");
         })
 
         // token uri should be complete i.e: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1
-        it('should return token uri', async function () { 
-            let uri = await this.contract.BaseTokenURI();
-            assert.equal(uri,"https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/","Incorrect uri");
+        it('should return token uri', async function () {
+
+            const tokenId = config.firstTokenId
+            let expectedTokenUri = config.baseTokenURI.concat(tokenId)
+
+            let status = await config.myToken.tokenURI.call(tokenId, { from: config.owner });
+            assert.equal(status, expectedTokenUri, "Token URL is not proper");
+
         })
 
-        it('should transfer token from one owner to another', async function () { 
-            let amountTwo = await this.contract.ownerOf(1);
-            await this.contract.transferFrom(account_two,account_three,1,{from:account_two});
-            let amount = await this.contract.ownerOf(1);
-            assert.equal(amount,account_three,"Incorrect token amount");
+        it('should transfer token from one owner to another', async function () {
+            const tokenId = config.firstTokenId
+            let res1 = await config.myToken.approve(config.account_two, tokenId, { from: config.owner });
+            let res2 = await config.myToken.transferFrom(config.owner, config.account_two, tokenId, { from: config.owner });
+            let res3 = await config.myToken.ownerOf.call(tokenId);
+            assert.equal(res3, config.account_two, "New Owner is not correct");
         })
     });
 
     describe('have ownership properties', function () {
-        beforeEach(async function () { 
-            this.contract = await ERC721MintableComplete.new({from: account_one});
+
+        it('should return contract owner', async function () {
+            let ownerAddress = await config.myToken.owner.call();
+            assert.equal(ownerAddress, config.owner, "account[0] is owner");
         })
 
-        it('should fail when minting when address is not contract owner', async function () { 
-            let status = await this.contract.mint(account_two,8,{from:account_two});
-        })
-
-        it('should return contract owner', async function () { 
-            let owner = await this.contract._owner.call();
-            assert.equal(owner, account_one,"Not a correct owner.");
+        it('should fail when minting when address is not contract owner', async function () {
+            const token_Id = config.lastTokenId + 1
+            try {
+                await config.myToken.mint(config.account_two, token_Id, { from: config.account_two });
+            }
+            catch (e) {
+                console.log('Minting Error : ', e.reason);
+            }
         })
 
     });
-})
+
+});
