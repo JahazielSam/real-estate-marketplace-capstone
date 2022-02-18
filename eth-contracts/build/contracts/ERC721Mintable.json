@@ -34706,12 +34706,12 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0xbbBdBB780535Ec925a947A5735354919484C8694",
-      "transactionHash": "0xb5a1cba0d4b52a613e96ca14a4f8a4599140b22398d9ed4e0a0274a93e446d1b"
+      "address": "0xd9C13dD916C45e3F6Ba909F91765Ca669419b51a",
+      "transactionHash": "0xe886dfdbfe9dac0559f32df42769b2df1debeadc9ef1794e678ce743d2021762"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2022-02-17T20:25:11.617Z",
+  "updatedAt": "2022-02-18T05:45:44.394Z",
   "devdoc": {
     "methods": {
       "isApprovedForAll(address,address)": {

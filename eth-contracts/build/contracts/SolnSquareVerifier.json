@@ -9174,12 +9174,12 @@
     "4": {
       "events": {},
       "links": {},
-      "address": "0x63E5ceC1Bcd49c3481B9EBE791722208E0A3aA6e",
-      "transactionHash": "0x8680d2c43798ad902c7f5c081d1c14ec44bfe0506eecf7cd5eb0d89ad68fe750"
+      "address": "0xc67b711390c4a5010346BF069e0f2Cc829FfEFb4",
+      "transactionHash": "0x7fdec2c45f675c9f5552e3608439321ca0a1c834162a56c5a7e77d8c99e3b1b6"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2022-02-17T20:25:11.635Z",
+  "updatedAt": "2022-02-18T05:45:44.413Z",
   "devdoc": {
     "methods": {
       "isApprovedForAll(address,address)": {
