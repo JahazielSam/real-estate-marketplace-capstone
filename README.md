@@ -1,15 +1,14 @@
 # Udacity Blockchain Capstone
 
-This project is about managing Real Estate Marketplace in Etherium Blockchain.Each property is represented by ERC721 Token. before you can mint a token you need to verify that you are the owner of the property.zk-SNARKs is used to create a verification system which can prove you have title to the property without revealing that specific information on the property.Once the token has been verified you will place it on a blockchain market place (OpenSea) for others to purchase.
+This project is about managing Real Estate Marketplace in Etherium Blockchain.Each property is represented by ERC721 Token. Before minting a token you need to proove that you are the authentic owner of the property. zk-SNARKs is used for that. It creates a verification system which can prove you have title to the property without revealing that specific information on the property. After the verification the token is listed on a blockchain market place (OpenSea) for the owners to sell and others to buy it.
 
-# Tools
+# Tools and IDE
 
 - [Remix - Solidity IDE](https://remix.ethereum.org/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Truffle Framework](https://truffleframework.com/)
 - [Ganache - One Click Blockchain](https://truffleframework.com/ganache)
 - [Open Zeppelin ](https://openzeppelin.org/)
-- [Interactive zero knowledge 3-colorability demonstration](http://web.mit.edu/~ezyang/Public/graph/svg.html)
 - [Docker](https://docs.docker.com/install/)
 - [ZoKrates](https://github.com/Zokrates/ZoKrates)
 
@@ -17,34 +16,48 @@ This project is about managing Real Estate Marketplace in Etherium Blockchain.Ea
 
 To install, first clone this repo, and give:
 
+```
 npm install
 npm install --save truffle-hdwallet-provider
+```
 
 Start Ganache in CLI or GUI:
 Below is the command for CLI:
 
+```
 ganache-cli -a 40 -m "<YOUR MNEMONIC>"
+```
 
 In a new terminal window,move inside eth-contracts/ Compile smart contracts:
+
+```
 cd eth-contracts/
 truffle compile
+```
 
 # Testing the Contracts
 
 To run truffle tests: In directory eth-contracts/
-cd eth-contracts/
 
+```
+cd eth-contracts/
+```
+
+```
 truffle test test/TestERC721Mintable.js
 truffle test test/TestSquareVerifier.js
 truffle test test/TestSolnSquareVerifier.js
+```
 
 For all tests:
 truffle test (All 11 tests should pass. For single file tests)
 
 # Deployment in Rinkeby
 
+```
 truffle compile
 truffle migrate --network rinkeby --reset
+```
 
 ## Rinkeby Deployment output:
 
