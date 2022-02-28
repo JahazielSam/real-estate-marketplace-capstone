@@ -1,6 +1,6 @@
 # Udacity Blockchain Capstone
 
-This project is about managing Real Estate Marketplace in Etherium Blockchain.Each property is represented by ERC721 Token. Before minting a token you need to proove that you are the authentic owner of the property. zk-SNARKs is used for that. It creates a verification system which can prove you have title to the property without revealing that specific information on the property. After the verification the token is listed on a blockchain market place (OpenSea) for the owners to sell and others to buy it.
+This project is about managing Real Estate Marketplace in Ethereum Blockchain. Each property is represented by ERC721 Token. Before minting a token you need to proove that you are the authentic owner of the property. zk-SNARKs is used for that. It creates a verification system which can prove you have title to the property without revealing that specific information on the property. After the verification the token is listed on a blockchain market place (OpenSea) for the owners to sell and others to buy it.
 
 # Tools and IDE
 
